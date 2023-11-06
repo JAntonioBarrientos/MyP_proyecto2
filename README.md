@@ -6,3 +6,5 @@ Para hacer la discriminación de pixeles se puede usar el método descrito en el
 Roy, G., S. Hayman y W. Julian, "Sky analysis from CCD images: cloud cover", Lighting
 Research Technology, Vol. 33, No. 4, pp. 211-222, 2001.
 
+
+HOSSOSOSO PRUEBA 273636326 2727
