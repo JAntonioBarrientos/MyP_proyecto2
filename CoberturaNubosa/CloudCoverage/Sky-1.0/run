@@ -1,0 +1,1 @@
+java -classpath bin/sky.jar  mx.unam.fciencias.sky.Cleaner 11748.jpg algo.png

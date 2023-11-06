@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+     Archivo de construcción del sistema de análisis del cielo mediante 
+     fotografía digital
+     Los diferentes "targets" son:
+            1. compile
+               Construye los archivos .class a partir de los archivos .java en
+               el directorio src
+            2. package
+               Luego de hacer "compile", genera el archivo sky.jar a partir
+               de los .class en el directorio bin.
+            3. docs
+               Genera los archivos html, resultado de ejecutar javadoc en los
+               archivos fuente, en el directorio doc.
+            4. all
+               Todos los anteriores.
+            5. clean
+               Elimina los archivos de respaldo: "*~", los .class y los
+               directorios bin y doc.
+-->
+
+<project  name="Date" default="all" basedir=".">
+
+<property name="pkg.prefix" value="mx/unam/fciencias"/>
+<property name="pkg.name"   value="date"/>
+<property name="pkg.vers"   value="1.0"/>
+<property name="src.base"   value="src"/>
+<property name="src.dir"    value="${pkg.name}"/>
+<property name="bin.dir"    value="bin"/>
+<property name="doc.dir"    value="doc"/>
+<property name="html.dir"   value="html"/>
+<property name="xml.dir"    value="xml"/>
+<property name="script.dir" value="scripts"/>
+
+<property name="j2sdk.homedir" value="/usr/share/java-sun/jdk1.6.0_07"/>
+<path id="compile.classpath">
+    <pathelement location="${j2sdk.homedir}/lib"/>
+    <fileset dir="${j2sdk.homedir}/lib">
+       <include name="*.jar"/>
+    </fileset>
+    <pathelement location="${j2sdk.homedir}/jre/lib"/>
+    <fileset dir="${j2sdk.homedir}/jre/lib">
+       <include name="*.jar"/>
+    </fileset>
+    <pathelement location="${src.base}"/>
+</path>
+
+<target name="clean"
+   description="Elimina respaldos de editor, *.class y directorios bin y doc.">
+   <delete failonerror="false" dir="${bin.dir}"/>
+   <delete failonerror="false" dir="${doc.dir}"/>
+</target>
+
+<target name="compile"
+   description="Genera archivos *.class.">
+   <mkdir dir="${bin.dir}/${pkg.prefix}/${pkg.name}"/>
+   <javac 
+      srcdir="${src.base}/${pkg.prefix}/${src.dir}"
+      destdir="${bin.dir}"
+      source="1.5">
+      <classpath refid="compile.classpath"/>
+   </javac>
+</target>
+
+<target name="docs"
+   description="Genera archivos *.html usando javadoc.">
+   <echo message="Source path: ${src.base}/${src.dir}"/>
+   <javadoc
+      charset="utf-8" docencoding="utf-8"
+      nodeprecated="true" nodeprecatedlist="true"
+      nohelp="true" version="true" author="true"
+      Windowtitle="${pkg.name} ${pkg.vers}"
+      destdir="${doc.dir}"
+      packagenames="*"
+      sourcepath="${src.base}">
+      <classpath refid="compile.classpath"/>
+      <doctitle><![CDATA[<h1>${pkgname} ${pkg.vers}</h1>]]></doctitle>
+   </javadoc>
+</target>
+
+<target name="package" depends="compile"
+   description="Construye todo el paquete, no genera documentación">
+   <jar
+      destfile="${bin.dir}/${pkg.name}.jar"
+      basedir="${bin.dir}"
+      includes="${pkg.prefix}/${pkg.name}/*"/>
+</target>
+
+<target name="all"     depends="compile, package, docs"
+   description="Construye el paquete completo incuyendo documentación."/>
+</project>
