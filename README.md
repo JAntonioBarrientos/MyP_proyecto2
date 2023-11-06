@@ -13,4 +13,3 @@ Roy, G., S. Hayman y W. Julian, "Sky analysis from CCD images: cloud cover", Lig
 Research Technology, Vol. 33, No. 4, pp. 211-222, 2001.
 
 
-
