@@ -3,13 +3,15 @@ from PIL import Image, ImageDraw
 def proceso_Convolucionador(imagen_path):
     """
     Aplica una convolución a una imagen utilizando una máscara circular y la operación de votación,
-    este proceso aumenta muchisimo la velocidad de procesamiento de la imagen, mas porque consideramos
+    este proceso aumenta disminuye mucho la velocidad de procesamiento de la imagen, mas porque consideramos
     para cada pixel una matriz 5x5 de sus alrededores, se probo con 3x3 pero no se obtenian los resultados deseados,
-    sin embargo este cambio si reduce el tiempo de ejecucion en un 60% (de 1m 40s a 40s).
+    sin embargo este cambio si reduciria el tiempo de ejecucion en un 60% (de 1m 40s a 40s).
 
     El proceso de convolución basicamente recorre la imagen util (dentro de los 360) y para cada pixel checa si 
-    los pixeles a su alrededor (2 niveles alrededor) coinciden en el color (nube o despejado) 
-    para saber si probablemente el pixel deberia cambiar de color.
+    los pixeles a su alrededor (2 niveles alrededor) coinciden en el color (nube o despejado) para saber si 
+    probablemente el pixel deberia cambiar de color, se hace una validacion para solo procesar los pixeles relevantes
+    a la foto utilizando la opacidad, esto no aumenta mucho la velocidad de ejecucion pero logicamente si la correctez 
+    en el borde de la imagen.
 
     :param imagen_path: Ruta de la imagen de entrada.
     :return: Ruta de la imagen resultante.
