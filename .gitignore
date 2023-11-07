@@ -2,6 +2,6 @@ bin/
 lib/
 lib64
 pyvenv.cfg
-*.png
-*.jpg
+*.png*
+*.jpg*
 __pycache__

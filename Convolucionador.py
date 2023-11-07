@@ -2,7 +2,14 @@ from PIL import Image, ImageDraw
 
 def proceso_Convolucionador(imagen_path):
     """
-    Aplica una convolución a una imagen utilizando una máscara circular y la operación de votación.
+    Aplica una convolución a una imagen utilizando una máscara circular y la operación de votación,
+    este proceso aumenta muchisimo la velocidad de procesamiento de la imagen, mas porque consideramos
+    para cada pixel una matriz 5x5 de sus alrededores, se probo con 3x3 pero no se obtenian los resultados deseados,
+    sin embargo este cambio si reduce el tiempo de ejecucion en un 60% (de 1m 40s a 40s).
+
+    El proceso de convolución basicamente recorre la imagen util (dentro de los 360) y para cada pixel checa si 
+    los pixeles a su alrededor (2 niveles alrededor) coinciden en el color (nube o despejado) 
+    para saber si probablemente el pixel deberia cambiar de color.
 
     :param imagen_path: Ruta de la imagen de entrada.
     :return: Ruta de la imagen resultante.
@@ -20,12 +27,16 @@ def proceso_Convolucionador(imagen_path):
                 for j in range(y - 1, y + 2):
                     for i in range(x - 1, x + 2):
                         if 0 <= i < ancho and 0 <= j < alto:
-                            vecinos.append(imagen_con_opacidad.getpixel((i, j)))
+                            pixelVecino = imagen_con_opacidad.getpixel((i, j))
+                            if pixelVecino[3] != 0:
+                                vecinos.append(pixelVecino)
 
                 for j in range(y - 2, y + 3):
                     for i in range(x - 2, x + 3):
                         if (i < x - 1 or i > x + 1 or j < y - 1 or j > y + 1) and 0 <= i < ancho and 0 <= j < alto:
-                            vecinos.append(imagen_con_opacidad.getpixel((i, j)))
+                            pixelVecino = imagen_con_opacidad.getpixel((i, j))
+                            if pixelVecino[3] != 0:
+                                vecinos.append(pixelVecino)
 
                 resultado = proceso_Votacion(vecinos)
 
@@ -42,7 +53,7 @@ def proceso_Votacion(pixel_y_vecinos):
     """
     Realiza una operación de votación para contar píxeles blancos en la lista de vecinos.
 
-    :param pixel_y_vecinos: Lista de píxeles y sus vecinos.
+    :param pixel_y_vecinos: Lista de los vecinos de un pixel y si mismo.
     :return: Conteo de píxeles blancos.
     """
     conteo_blancos = 0
@@ -55,7 +66,9 @@ def proceso_Votacion(pixel_y_vecinos):
 
 def aplicar_mascara_a_imagen(imagen_path):
     """
-    Abre una imagen PNG, crea una máscara circular y aplica la máscara como máscara de opacidad a la imagen original.
+    Abre una imagen PNG, crea una máscara circular y aplica la máscara como máscara de opacidad a la imagen original, 
+    esto es para obtener solo el circulo interno que es la imagen util y el resto marcarlos con opacidad 0 para aumentar
+    la eficiencia del programa.
 
     :param imagen_path: Ruta de la imagen de entrada.
     :return: Imagen con la máscara de opacidad aplicada.
