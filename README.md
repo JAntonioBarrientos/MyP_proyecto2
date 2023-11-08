@@ -29,6 +29,14 @@ Ejemplo:
     python main.py IMAGEN.jpg
 ```
 
+## Pruebas unitarias
+Para correr las pruebas unitarias ejecute el comando:
+
+```bash
+    python -m unittest tests.test_imagen
+```
+
+
 ## Esturctura Del Proyecto
 
 1.  `main.py:` Programa principal para ejecutar el proyecto.
@@ -42,6 +50,8 @@ Ejemplo:
 ## Librerias:
 
 - PILLOW: https://pillow.readthedocs.io/en/stable/
+
+
 
 
 

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
-from my_module import verificar_imagen, manejar_entrada, ErrorFormato, ErrorDimension
+from ManejadorEntrada import verificar_imagen, manejar_entrada, ErrorFormato, ErrorDimension
 
 class TestVerificarImagen(unittest.TestCase):
 
