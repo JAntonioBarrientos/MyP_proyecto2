@@ -1,5 +1,6 @@
 def calcular_CCI(imagen_convolucion):
     """
+    
     Calcula el Índice de Cobertura de Nubes (CCI) en una imagen de convolución.
 
     El CCI se calcula dividiendo el número de píxeles que representan nubes en la imagen
