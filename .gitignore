@@ -1,5 +1,6 @@
 bin/
 lib/
-lib64
+lib64/
+MyP_proyecto2/lib
 pyvenv.cfg
-
+__pycache__/
