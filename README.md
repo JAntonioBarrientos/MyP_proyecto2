@@ -24,9 +24,9 @@ Ejecute el programa principal `main.py` proporcionando el nombre del archivo de 
 Ejemplo:
 
 ```bash
-    python main.py IMAGEN.jpg S
-    python main.py IMAGEN.jpg s
-    python main.py IMAGEN.jpg
+python main.py IMAGEN.jpg S
+python main.py IMAGEN.jpg s
+python main.py IMAGEN.jpg
 ```
 
 ## Pruebas unitarias
