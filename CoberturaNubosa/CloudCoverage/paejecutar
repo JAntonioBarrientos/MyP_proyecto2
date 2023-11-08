@@ -1,1 +1,0 @@
-java -classpath $CLASSPATH:Sky-1.0/bin/sky.jar:Date-1.0/bin/date.jar CloudCoverage 11838.jpg
