@@ -3,4 +3,7 @@ lib/
 lib64/
 MyP_proyecto2/lib
 pyvenv.cfg
+*.png*
+*.jpg*
+__pycache__
 __pycache__/
