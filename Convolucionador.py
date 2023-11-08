@@ -1,42 +1,42 @@
 from PIL import Image, ImageDraw
 
-def proceso_Convolucionador(imagen_path):
+def proceso_Convolucionador(imagen):
     """
-    Aplica una convolución a una imagen utilizando una máscara circular y la operación de votación,
-    este proceso aumenta disminuye mucho la velocidad de procesamiento de la imagen, mas porque consideramos
-    para cada pixel una matriz 5x5 de sus alrededores, se probo con 3x3 pero no se obtenian los resultados deseados,
-    sin embargo este cambio si reduciria el tiempo de ejecucion en un 60% (de 1m 40s a 40s).
+    Aplica un proceso de convolución a una imagen.
 
-    El proceso de convolución basicamente recorre la imagen util (dentro de los 360) y para cada pixel checa si 
-    los pixeles a su alrededor (2 niveles alrededor) coinciden en el color (nube o despejado) para saber si 
-    probablemente el pixel deberia cambiar de color, se hace una validacion para solo procesar los pixeles relevantes
-    a la foto utilizando la opacidad, esto no aumenta mucho la velocidad de ejecucion pero logicamente si la correctez 
-    en el borde de la imagen.
+    Args:
+        imagen (PIL.Image.Image): La imagen a procesar.
 
-    :param imagen_path: Ruta de la imagen de entrada.
-    :return: Ruta de la imagen resultante.
+    Returns:
+        PIL.Image.Image: La imagen procesada.
+
+    Realiza un proceso de convolución en la imagen, donde cada píxel se evalúa
+    en función de los valores de sus vecinos y se aplica una regla de votación
+    para determinar su nuevo valor.
+
+    Se utiliza una matriz 5x5 para este proceso, se probo con una matriz 3x3 pero
+    no daba los resultados deseados.
     """
-    imagen_con_opacidad = aplicar_mascara_a_imagen(imagen_path)
-
-    ancho, alto = imagen_con_opacidad.size
-    draw = ImageDraw.Draw(imagen_con_opacidad)
+    
+    ancho, alto = imagen.size
+    draw = ImageDraw.Draw(imagen)
 
     for y in range(alto):
         for x in range(ancho):
-            pixel = imagen_con_opacidad.getpixel((x, y))
+            pixel = imagen.getpixel((x, y))
             if pixel[3] != 0:
                 vecinos = []
                 for j in range(y - 1, y + 2):
                     for i in range(x - 1, x + 2):
                         if 0 <= i < ancho and 0 <= j < alto:
-                            pixelVecino = imagen_con_opacidad.getpixel((i, j))
+                            pixelVecino = imagen.getpixel((i, j))
                             if pixelVecino[3] != 0:
                                 vecinos.append(pixelVecino)
 
                 for j in range(y - 2, y + 3):
                     for i in range(x - 2, x + 3):
                         if (i < x - 1 or i > x + 1 or j < y - 1 or j > y + 1) and 0 <= i < ancho and 0 <= j < alto:
-                            pixelVecino = imagen_con_opacidad.getpixel((i, j))
+                            pixelVecino = imagen.getpixel((i, j))
                             if pixelVecino[3] != 0:
                                 vecinos.append(pixelVecino)
 
@@ -47,17 +47,22 @@ def proceso_Convolucionador(imagen_path):
                 elif 16 < resultado <= 25:
                     draw.point((x, y), fill=(255, 255, 255, 255))  # Blanco
 
-    resultado_path = 'imagen_convolucionada.png'
-    imagen_con_opacidad.save(resultado_path)
-    return resultado_path
+    return imagen
 
 def proceso_Votacion(pixel_y_vecinos):
     """
-    Realiza una operación de votación para contar píxeles blancos en la lista de vecinos.
+    Realiza un proceso de votación en una lista de píxeles.
 
-    :param pixel_y_vecinos: Lista de los vecinos de un pixel y si mismo.
-    :return: Conteo de píxeles blancos.
+    Args:
+        pixel_y_vecinos (list): Lista de píxeles y sus vecinos.
+
+    Returns:
+        int: El resultado del proceso de votación.
+
+    El proceso de votación cuenta cuántos píxeles blancos hay en la lista de
+    píxeles y devuelve el recuento.
     """
+    
     conteo_blancos = 0
 
     for pixel in pixel_y_vecinos:
@@ -66,21 +71,25 @@ def proceso_Votacion(pixel_y_vecinos):
 
     return conteo_blancos
 
-def aplicar_mascara_a_imagen(imagen_path):
+def aplicar_mascara_a_imagen(imagen, radio):
     """
-    Abre una imagen PNG, crea una máscara circular y aplica la máscara como máscara de opacidad a la imagen original, 
-    esto es para obtener solo el circulo interno que es la imagen util y el resto marcarlos con opacidad 0 para aumentar
-    la eficiencia del programa.
+    Aplica una máscara elíptica a una imagen.
 
-    :param imagen_path: Ruta de la imagen de entrada.
-    :return: Imagen con la máscara de opacidad aplicada.
+    Args:
+        imagen (PIL.Image.Image): La imagen a la que se aplicará la máscara.
+        radio (int): El radio de la máscara elíptica.
+
+    Returns:
+        PIL.Image.Image: La imagen con la máscara aplicada.
+
+    Crea una máscara elíptica y la aplica a la imagen, dejando solo visible la
+    parte de la imagen que coincide con la máscara.
     """
-    imagen = Image.open(imagen_path)
+    
     ancho, alto = imagen.size
+    centro = (ancho // 2, alto // 2)
     mascara = Image.new('L', (ancho, alto), 0)
     dibujo = ImageDraw.Draw(mascara)
-    radio = 1324
-    centro = (ancho // 2, alto // 2)
     dibujo.ellipse((centro[0] - radio, centro[1] - radio, centro[0] + radio, centro[1] + radio), fill=255)
     imagen.putalpha(mascara)
     return imagen

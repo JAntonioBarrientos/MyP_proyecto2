@@ -1,3 +1,6 @@
+from Convolucionador import proceso_Convolucionador, aplicar_mascara_a_imagen
+from PIL import Image, ImageDraw
+
 def main():
     """
     Funcion principal del programa.
@@ -13,6 +16,13 @@ def main():
     centro_circulo = (2184,1456)
     radio_circulo = 1324
 
+    imagen_path = 'imagenBN.png'  # Reemplaza con la ruta de tu imagen
+    imagen = Image.open(imagen_path)
+    imagen = aplicar_mascara_a_imagen(imagen, radio_circulo)
+    imagen2 = proceso_Convolucionador(imagen)
+    imagen2.save('imagen2.png')
+
+    
 
 if __name__ == "__main__":
     main()
