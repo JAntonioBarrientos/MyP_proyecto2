@@ -13,7 +13,7 @@ def proceso_Convolucionador(imagen):
     Realiza un proceso de convolución en la imagen, donde cada píxel se evalúa
     en función de los valores de sus vecinos y se aplica una regla de votación
     para determinar su nuevo valor.
-    
+
     Se utiliza una matriz 5x5 para este proceso, se probo con una matriz 3x3 pero
     no daba los resultados deseados.
     """
@@ -70,26 +70,3 @@ def proceso_Votacion(pixel_y_vecinos):
             conteo_blancos += 1
 
     return conteo_blancos
-
-def aplicar_mascara_a_imagen(imagen, radio):
-    """
-    Aplica una máscara elíptica a una imagen.
-
-    Args:
-        imagen (PIL.Image.Image): La imagen a la que se aplicará la máscara.
-        radio (int): El radio de la máscara elíptica.
-
-    Returns:
-        PIL.Image.Image: La imagen con la máscara aplicada.
-
-    Crea una máscara elíptica y la aplica a la imagen, dejando solo visible la
-    parte de la imagen que coincide con la máscara.
-    """
-    
-    ancho, alto = imagen.size
-    centro = (ancho // 2, alto // 2)
-    mascara = Image.new('L', (ancho, alto), 0)
-    dibujo = ImageDraw.Draw(mascara)
-    dibujo.ellipse((centro[0] - radio, centro[1] - radio, centro[0] + radio, centro[1] + radio), fill=255)
-    imagen.putalpha(mascara)
-    return imagen
