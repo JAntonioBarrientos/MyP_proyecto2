@@ -33,7 +33,7 @@ Ejemplo:
 Para correr las pruebas unitarias ejecute el comando:
 
 ```bash
-    python -m unittest tests.test_ManejadorEntrada
+python3 -m unittest tests.test_ManejadorEntrada
 ```
 
 
