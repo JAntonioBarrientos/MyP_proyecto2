@@ -38,8 +38,12 @@ def main():
     imagen = aplicar_mascara_a_imagen(imagen, radio_circulo)
     imagen = imagen.convert('RGBA') 
     imagen = proceso_Convolucionador(imagen)
-    print('Este es el CCI de tu imagen chiquibabi:',calcular_CCI(imagen))
-    imagen.save('imagenFinal.png')
+    print('Este es el CCI de tu imagen:',calcular_CCI(imagen))
+    
+    if bandera_s:
+        nuevo_nombre = f"{nombre_imagen.split('.')[0]}-seg.png"
+        imagen.save(nuevo_nombre)
+
 
 if __name__ == "__main__":
     main()
