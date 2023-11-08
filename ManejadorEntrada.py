@@ -22,15 +22,16 @@ def verificar_imagen(nombre_imagen, ancho_imagen, largo_imagen):
     - bool: True si la imagen cumple con los requisitos, False en caso contrario.
     """
     try:
-        img = Image.open(nombre_imagen)
+        with Image.open(nombre_imagen) as img:
         
-        # Verificar que la imagen está en formato JPEG
-        if img.format != 'JPEG':
-            raise ErrorFormato(f"La imagen {nombre_imagen} no está en formato JPEG.")
-        
-        # Verificar que la imagen tiene las dimensiones correctas
-        if img.size != (ancho_imagen, largo_imagen):
-            raise ErrorDimension(f"La imagen {nombre_imagen} no tiene las dimensiones correctas. Debe ser de {ancho_imagen} px de ancho y {largo_imagen} px de alto.")
+            # Verificar que la imagen está en formato JPEG
+            if img.format != 'JPEG':
+                raise ErrorFormato(f"La imagen {nombre_imagen} no está en formato JPEG.")
+            
+            # Verificar que la imagen tiene las dimensiones correctas
+            if img.size != (ancho_imagen, largo_imagen):
+                raise ErrorDimension(f"La imagen {nombre_imagen} no tiene las dimensiones correctas. Debe ser de {ancho_imagen} px de ancho y {largo_imagen} px de alto.")
+            
     except IOError:
         print(f"No se pudo abrir la imagen {nombre_imagen}.")
         return False
@@ -49,8 +50,8 @@ def manejar_entrada():
         return None, False
 
     nombre_imagen = sys.argv[1]
-    
+        
     # Verificar si se proporcionó la bandera 'S'
-    bandera_s = len(sys.argv) > 2 and sys.argv[2].lower() == 's'
+    bandera_s = len(sys.argv) > 2 and (sys.argv[2].lower() == 's' or sys.argv[2].lower() == '-s')
     
     return nombre_imagen, bandera_s

@@ -52,6 +52,6 @@ def main():
         nuevo_nombre = f"{nombre_imagen.split('.')[0]}-seg.png"
         imagen.save(nuevo_nombre)
 
-    
+
 if __name__ == "__main__":
     main()
