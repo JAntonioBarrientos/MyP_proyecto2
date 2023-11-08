@@ -9,13 +9,41 @@
 ## Descripción
 Este proyecto tiene como objetivo calcular el Índice de Cobertura Nubosa (CCI) en imágenes del cielo capturadas mediante una camara. Además, opcionalmente, permite generar una imagen en blanco y negro que destaque las áreas de nubes y cielo en la fotografía.
 
-## Requisitos
 
-- Python 3
-- Tener las bibliotecas necesarias. Esto se puede ejecutar mediante:
+
+## Instrucciones
+1. Clona el repositorio desde la terminal:
+
 ```bash
-    pip install -r requirements.txt
+   $ git clone https://github.com/JAntonioBarrientos/MyP_proyecto2
 ```
+
+2. Crear un entorno virtual desde la carpeta del proyecto:
+
+```bash
+    $ cd MyP_proyecto02
+    $ python -m venv venv
+```
+3. Activar el entorno virtual desde la carpeta del proyecto:
+
+Linux:
+```bash
+    $ source venv/bin/activate 
+```
+
+Windows:
+```bash
+    $ venv\Scripts\activate 
+```
+
+4. Instalar las dependencias del proyecto: `requirements.txt`
+
+```bash
+    $ pip install -r requirements.txt
+```
+
+Nota: Se debe tener instalado python y pip. En caso de tener varias versiones de python especificar python3.
+
 
 ## Uso
 
@@ -26,9 +54,9 @@ Ejecute el programa principal main.py proporcionando el nombre del archivo de im
 Ejemplo:
 
 ```bash
-python3 main.py IMAGEN.jpg S
-python3 main.py IMAGEN.jpg s
-python3 main.py IMAGEN.jpg
+python main.py IMAGEN.jpg S
+python main.py IMAGEN.jpg s
+python main.py IMAGEN.jpg
 
 ```
 
@@ -36,7 +64,7 @@ python3 main.py IMAGEN.jpg
 Para correr las pruebas unitarias ejecute el comando:
 
 ```bash
-python3 -m unittest tests.test_ManejadorEntrada
+python -m unittest tests.test_ManejadorEntrada
 ```
 
 
