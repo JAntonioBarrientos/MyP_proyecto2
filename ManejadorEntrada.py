@@ -53,5 +53,6 @@ def manejar_entrada():
         
     # Verificar si se proporcionó la bandera 'S'
     bandera_s = len(sys.argv) > 2 and (sys.argv[2].lower() == 's' or sys.argv[2].lower() == '-s')
+
     
     return nombre_imagen, bandera_s

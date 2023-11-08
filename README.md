@@ -19,14 +19,17 @@ Este proyecto tiene como objetivo calcular el Índice de Cobertura Nubosa (CCI) 
 
 ## Uso
 
+
 Ejecute el programa principal main.py proporcionando el nombre del archivo de imagen de entrada la cual debe estar en la raiz del repositorio, en formato JPEG. Puedes incluir la bandera opcional "S", "s", "-s" o "-S"  al final para generar la imagen en blanco y negro.
+
 
 Ejemplo:
 
 ```bash
-python main.py IMAGEN.jpg S
-python main.py IMAGEN.jpg s
-python main.py IMAGEN.jpg
+python3 main.py IMAGEN.jpg S
+python3 main.py IMAGEN.jpg s
+python3 main.py IMAGEN.jpg
+
 ```
 
 ## Pruebas unitarias
@@ -50,6 +53,7 @@ python3 -m unittest tests.test_ManejadorEntrada
 
 - PILLOW: https://pillow.readthedocs.io/en/stable/
 - NumPy: https://numpy.org/doc/stable/
+
 
 
 

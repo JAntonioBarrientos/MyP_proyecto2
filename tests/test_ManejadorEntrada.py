@@ -12,6 +12,7 @@ class TestVerificarImagen(unittest.TestCase):
         with self.assertRaises(ErrorFormato):
             verificar_imagen("tests/test.png", 100, 100)
 
+
     def test_verificar_imagen_dimensiones_incorrectas(self):
         """
         Prueba que la función verificar_imagen levanta un ErrorDimension para dimensiones incorrectas.
