@@ -19,7 +19,7 @@ Este proyecto tiene como objetivo calcular el Índice de Cobertura Nubosa (CCI) 
 
 ## Uso
 
-Ejecute el programa principal `main.py` proporcionando el nombre del archivo de imagen de entrada en formato JPEG. Puedes incluir la bandera opcional "S", "s", "-s" o "-S"  al final para generar la imagen en blanco y negro. 
+Ejecute el programa principal main.py proporcionando el nombre del archivo de imagen de entrada la cual debe estar en la raiz del repositorio, en formato JPEG. Puedes incluir la bandera opcional "S", "s", "-s" o "-S"  al final para generar la imagen en blanco y negro.
 
 Ejemplo:
 
