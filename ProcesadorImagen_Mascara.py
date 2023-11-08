@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 
-def imagen_mascara(archivo):
+def imagen_mascara(nombre_imagen):
     """
     Crea una imagen con una máscara elíptica y recorta la imagen de entrada con esa máscara.
 
@@ -10,7 +10,7 @@ def imagen_mascara(archivo):
     :rtype: PIL.Image.Image
     """
 
-    imagen = Image.open(archivo)
+    imagen = Image.open(nombre_imagen)
     ancho, alto = imagen.size
 
     centro_x = ancho // 2
