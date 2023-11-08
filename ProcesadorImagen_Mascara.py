@@ -1,26 +1,21 @@
 from PIL import Image, ImageDraw
 
-def imagen_mascara(nombre_imagen):
+def aplicar_mascara_a_imagen(imagen, radio):
     """
-    Crea una imagen con una máscara elíptica y recorta la imagen de entrada con esa máscara.
-
-    :param archivo: Imagen de entrada.
-    :type archivo: str
-    :return: Imagen recortada con la máscara elíptica.
-    :rtype: PIL.Image.Image
+    Aplica una máscara elíptica a una imagen.
+    Args:
+        imagen (PIL.Image.Image): La imagen a la que se aplicará la máscara.
+        radio (int): El radio de la máscara elíptica.
+    Returns:
+        PIL.Image.Image: La imagen con la máscara aplicada.
+    Crea una máscara elíptica y la aplica a la imagen, dejando solo visible la
+    parte de la imagen que coincide con la máscara.
     """
 
-    imagen = Image.open(nombre_imagen)
     ancho, alto = imagen.size
-
-    centro_x = ancho // 2
-    centro_y = alto // 2
-    radio = 1324
-
+    centro = (ancho // 2, alto // 2)
     mascara = Image.new('L', (ancho, alto), 0)
-    draw = ImageDraw.Draw(mascara)
-    draw.ellipse((centro_x - radio, centro_y - radio, centro_x + radio, centro_y + radio), fill=255)
-    imagen_recortada = Image.new('RGB', (ancho, alto))
-    imagen_recortada.paste(imagen, mask=mascara)
-    
-    return imagen_recortada
+    dibujo = ImageDraw.Draw(mascara)
+    dibujo.ellipse((centro[0] - radio, centro[1] - radio, centro[0] + radio, centro[1] + radio), fill=255)
+    imagen.putalpha(mascara)
+    return imagen

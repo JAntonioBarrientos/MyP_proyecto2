@@ -40,4 +40,4 @@ def procesa_imagen_a_blanco_y_negro(imagen):
         
         it.iternext()
 
-    return imagen_BN
+    return imagen
