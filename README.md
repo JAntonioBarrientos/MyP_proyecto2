@@ -19,25 +19,28 @@ Este proyecto tiene como objetivo calcular el Índice de Cobertura Nubosa (CCI) 
 
 ## Uso
 
-Ejecute el programa principal `main.py` proporcionando el nombre del archivo de imagen de entrada en formato JPEG. Puedes incluir la bandera opcional "S" o "s" al final para generar la imagen en blanco y negro. 
+
+Ejecute el programa principal main.py proporcionando el nombre del archivo de imagen de entrada la cual debe estar en la raiz del repositorio, en formato JPEG. Puedes incluir la bandera opcional "S", "s", "-s" o "-S"  al final para generar la imagen en blanco y negro.
+
 
 Ejemplo:
 
 ```bash
-    python main.py IMAGEN.jpg S
-    python main.py IMAGEN.jpg s
-    python main.py IMAGEN.jpg
+python3 main.py IMAGEN.jpg S
+python3 main.py IMAGEN.jpg s
+python3 main.py IMAGEN.jpg
+
 ```
 
 ## Pruebas unitarias
 Para correr las pruebas unitarias ejecute el comando:
 
 ```bash
-    python -m unittest tests.test_imagen
+python3 -m unittest tests.test_ManejadorEntrada
 ```
 
 
-## Esturctura Del Proyecto
+## Estructura del proyecto
 
 1.  `main.py:` Programa principal para ejecutar el proyecto.
 2.  `CalculadorCCI.py`: Calcula el Índice de Cobertura Nubosa (CCI) a partir de la imagen procesada.
@@ -45,11 +48,12 @@ Para correr las pruebas unitarias ejecute el comando:
 4.  `FiltroRB_ClasificadorPixeles.py`: Clasifica los píxeles de la imagen como nubes o cielo.
 5.  `ManejadorEntrada.py`: Gestiona la validación de la entrada, la comprobación de la bandera y las dimensiones de la imagen.
 6.  `ProcesadorImagen_Macara.py`: Aplica una máscara a la imagen para cubrir solo la parte útil.
-7.  `Salida.py`: Genera la imagen en blanco y negro si se proporciona la bandera "S".
 
-## Librerias:
+## Bibliotecas:
 
 - PILLOW: https://pillow.readthedocs.io/en/stable/
+- NumPy: https://numpy.org/doc/stable/
+
 
 
 

@@ -8,6 +8,7 @@ from ManejadorEntrada import verificar_imagen, ErrorFormato, ErrorDimension, man
 
 def main():
     """
+
     Funcion principal del programa.
 
     Ejecuta mediante los demás funciones definidas en los demas archivos 
