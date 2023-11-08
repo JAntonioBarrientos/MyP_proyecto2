@@ -1,5 +1,9 @@
-import sys
-
+from Convolucionador import proceso_Convolucionador
+from ProcesadorImagen_Mascara import aplicar_mascara_a_imagen
+from FiltroRB_ClasificadorPixeles import procesa_imagen_a_blanco_y_negro
+from RecortadorImagen import recortar
+from CalculadorCCI import  calcular_CCI
+from PIL import Image
 from ManejadorEntrada import verificar_imagen, ErrorFormato, ErrorDimension, manejar_entrada
 
 def main():
@@ -27,6 +31,15 @@ def main():
     except ErrorDimension as e:
         print(str(e))
         return
+       
+    imagen = Image.open(nombre_imagen)
+    imagen = recortar(imagen, centro_circulo, radio_circulo)
+    imagen = procesa_imagen_a_blanco_y_negro(imagen)
+    imagen = aplicar_mascara_a_imagen(imagen, radio_circulo)
+    imagen = imagen.convert('RGBA') 
+    imagen = proceso_Convolucionador(imagen)
+    print('Este es el CCI de tu imagen chiquibabi:',calcular_CCI(imagen))
+    imagen.save('imagenFinal.png')
 
 if __name__ == "__main__":
     main()
