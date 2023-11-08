@@ -10,6 +10,7 @@ def calcular_CCI(imagen_convolucion):
     :return: Índice de Cobertura de Nubes (CCI) de la imagen.
     :rtype: float
     """
-    # EN PROCESO 
+    total_pixeles = 3.1416 * (1324 ** 2)
+    pixeles_nube = sum(1 for pixel in imagen_convolucion.getdata() if pixel == 255)
     cci = pixeles_nube / total_pixeles
     return cci
