@@ -13,7 +13,7 @@ def proceso_Convolucionador(imagen):
     Realiza un proceso de convolución en la imagen, donde cada píxel se evalúa
     en función de los valores de sus vecinos y se aplica una regla de votación
     para determinar su nuevo valor.
-
+    
     Se utiliza una matriz 5x5 para este proceso, se probo con una matriz 3x3 pero
     no daba los resultados deseados.
     """
