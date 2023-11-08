@@ -8,12 +8,20 @@ from ManejadorEntrada import verificar_imagen, ErrorFormato, ErrorDimension, man
 
 def main():
     """
-    Funcion principal del programa.
+    Función principal del programa.
 
-    Ejecuta mediante los demás funciones definidas en los demas archivos 
-    el proceso para validar la entrada, recortar la imágen, aplicarle un filtro
-    para discernir entre pixeles 'nube' o 'cielo', convolucionar la imágen, aplicarle una
-    mascara, calcular el CCI y regresar dichos valores.
+    Ejecuta el proceso completo para validar la entrada de la imagen, recortarla,
+    aplicar un filtro para discernir entre pixeles 'nube' o 'cielo', convolucionar la imagen,
+    aplicarle una máscara, calcular el CCI y guardar la imagen resultante.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        None
     """
 
     ancho_imagen = 4368

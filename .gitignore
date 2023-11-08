@@ -7,3 +7,5 @@ pyvenv.cfg
 *.jpg*
 __pycache__
 __pycache__/
+*.html
+Documentacion.py
